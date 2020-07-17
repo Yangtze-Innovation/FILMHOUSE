@@ -23,9 +23,14 @@ public class UserController {
 	}
 	//请求登陆
 	@RequestMapping("/loginSubmit")
-	@ResponseBody
 	public String loginSubmit(User user) {
-		return userService.checkUser(user);
+		String status =  userService.checkUser(user);
+		if(status.equals("101")){
+			//验证成功
+			return "redirect:/film/list";
+		}else{
+			return null;
+		}
 	}
 	@RequestMapping("/save")	
 	@ResponseBody

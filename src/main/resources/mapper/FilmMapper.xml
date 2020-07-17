@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">	<!-- 映射文件的位置-->
+<mapper namespace="com.film.model.film.dao.FilmDao">
+<!--	查询影片列表信息-->
+	<select id="findList" resultType="com.film.model.film.entity.Film">
+		SELECT * FROM f_film order by id asc
+	</select>
+<!--	查询记录总数-->
+	<select id="rowCount" resultType="int">
+		SELECT count(*) FROM f_film
+	</select>
+	<!--	根据id查询电影信息-->
+	<select id="getFilmById" parameterType="int" resultType="com.film.model.film.entity.Film">
+		SELECT * FROM f_film where id = #{id}
+	</select>
+	<!--	查询列表-分页查询-->
+	<select id="selectListByCondition" parameterType="com.film.model.film.entity.FilmVo" resultType="com.film.model.film.entity.Film">
+		SELECT *  FROM f_film limit #{startRow},#{pageCount}
+	</select>
+<!--	保存用户信息-->
+	<insert id="insertSelective" parameterType="com.film.model.film.entity.Film">
+		INSERT INTO f_film (
+			id,
+			filmName,
+			filmPic,
+			summary)
+		VALUES(
+			#{id},
+			#{filmName},
+			#{filmPic},
+			#{summary})
+	</insert>
+	<!--	根据id查询电影信息-->
+	<delete id="deleteFilmById" parameterType="int">
+		DELETE  FROM f_film where id = #{id}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
